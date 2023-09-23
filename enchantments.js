@@ -19,20 +19,7 @@ export function seeingDouble(deck) {
  * @returns {number[]} deck with triplicate 3s
  */
 export function threeOfEachThree(deck) {
-  return deck.reduce(
-    (array, currentValue) => {
-      if (currentValue === 3) {
-        for (let index = 0; index < 3; index++) {
-          // @ts-ignore
-          array.push(currentValue)
-        }
-      } else {
-        // @ts-ignore
-        array.push(currentValue)
-      }
-      return array
-    }, [],
-  )
+  return deck.flatMap(card => card === 3 ? [card, card, card] : card)
 }
 
 /**
@@ -44,9 +31,9 @@ export function threeOfEachThree(deck) {
  * @returns {number[]} deck with only two middle cards
  */
 export function middleTwo(deck) {
-  const midleIndex = deck.length/2
+  const middleIndex = deck.length/2
   
-  return deck.slice(midleIndex - 1, midleIndex + 1)
+  return deck.slice(middleIndex - 1, middleIndex + 1)
 }
 
 /**
@@ -88,15 +75,7 @@ export function twoIsSpecial(deck) {
  * @returns {number[]} ordered deck
  */
 export function perfectlyOrdered(deck) {
-  return deck.sort((item1, item2) => {
-    if (item1 < item2) {
-      return -1
-    }
-    if (item1 > item2) {
-      return 1
-    }
-    return 0
-  })
+  return deck.sort((item1, item2) => item1 - item2)
 }
 
 /**
